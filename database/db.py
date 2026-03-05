@@ -7,10 +7,13 @@ def get_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
-
 def init_db():
     conn = get_connection()
-    with open("database/schema.sql") as f:
+    with open("database/schema.sql", "r", encoding="utf-8") as f:
         conn.executescript(f.read())
     conn.commit()
     conn.close()
+
+if __name__ == "__main__":
+    init_db()
+    print("DB initialized:", DB_PATH)
